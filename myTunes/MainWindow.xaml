@@ -11,9 +11,9 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
                 <DataGridTextColumn Binding="{Binding title}" Header="Title"/>
-                <DataGridTextColumn Binding="{Binding artist}" Header="Artist"/>
-                <DataGridTextColumn Binding="{Binding album}" Header="Album"/>
-                <DataGridTextColumn Binding="{Binding genre}" Header="Genre"/>
+                <DataGridTextColumn Binding="{Binding artist}" Header="Artist" Width="150"/>
+                <DataGridTextColumn Binding="{Binding album}" Header="Album" Width="150"/>
+                <DataGridTextColumn Binding="{Binding genre}" Header="Genre" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
 
