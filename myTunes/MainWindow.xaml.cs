@@ -26,7 +26,7 @@ namespace myTunes
 
             MusicLib musicLib = new MusicLib();
 
-            
+            musicDataGrid.ItemsSource = musicLib.Songs.DefaultView;
         }
     }
 }
