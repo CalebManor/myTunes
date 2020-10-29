@@ -23,6 +23,10 @@ namespace myTunes
         public MainWindow()
         {
             InitializeComponent();
+
+            MusicLib musicLib = new MusicLib();
+
+            
         }
     }
 }
