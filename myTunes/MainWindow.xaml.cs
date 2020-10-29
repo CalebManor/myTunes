@@ -27,6 +27,10 @@ namespace myTunes
             MusicLib musicLib = new MusicLib();
 
             musicDataGrid.ItemsSource = musicLib.Songs.DefaultView;
+            List<string> playlists = new List<string>();
+            playlists.Add("All Music");
+            playlists.AddRange(musicLib.Playlists);
+            playListBox.ItemsSource = playlists;
         }
     }
 }

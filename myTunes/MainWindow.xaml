@@ -16,6 +16,15 @@
                 <DataGridTextColumn Binding="{Binding genre}" Header="Genre" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
+        <ListBox x:Name="playListBox" HorizontalAlignment="Left" Height="300" Margin="45,55,0,0" VerticalAlignment="Top" Width="117">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
     </Grid>
 </Window>
