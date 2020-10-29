@@ -7,7 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Left" Height="300" Margin="185,55,0,0" VerticalAlignment="Top" Width="599"/>
+        <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Left" Height="300" Margin="185,55,0,0" VerticalAlignment="Top" Width="599" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding title}" Header="Title"/>
+                <DataGridTextColumn Binding="{Binding artist}" Header="Artist"/>
+                <DataGridTextColumn Binding="{Binding album}" Header="Album"/>
+                <DataGridTextColumn Binding="{Binding genre}" Header="Genre"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>
