@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myTunes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="831.5">
     <Grid>
-        <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Left" Height="300" Margin="185,55,0,0" VerticalAlignment="Top" Width="599" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+        <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Right" Height="300" Margin="185,55,10,0" VerticalAlignment="Top" Width="599" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
                 <DataGridTextColumn Binding="{Binding title}" Header="Title"/>
