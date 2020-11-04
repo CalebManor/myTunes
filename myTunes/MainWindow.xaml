@@ -6,9 +6,19 @@
         xmlns:local="clr-namespace:myTunes"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="831.5">
+    
+    
     <Grid>
         <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Right" Height="306" Margin="0,55,-0.2,0" VerticalAlignment="Top" Width="628" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
-            
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding title}" Header="Title"/>
+                <DataGridTextColumn Binding="{Binding artist}" Header="Artist" Width="150"/>
+                <DataGridTextColumn Binding="{Binding album}" Header="Album" Width="150"/>
+                <DataGridTextColumn Binding="{Binding genre}" Header="Genre" Width="150"/>
+            </DataGrid.Columns>
+
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <!--Code example used from https://docs.microsoft.com/en-us/dotnet/desktop/wpf/controls/how-to-add-row-details-to-a-datagrid-control?view=netframeworkdesktop-4.8-->
@@ -30,14 +40,14 @@
                     </Border>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
-            
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
-                <DataGridTextColumn Binding="{Binding title}" Header="Title"/>
-                <DataGridTextColumn Binding="{Binding artist}" Header="Artist" Width="150"/>
-                <DataGridTextColumn Binding="{Binding album}" Header="Album" Width="150"/>
-                <DataGridTextColumn Binding="{Binding genre}" Header="Genre" Width="150"/>
-            </DataGrid.Columns>
+
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="Play"/>
+                    <Separator/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+
         </DataGrid>
         
         <ListBox x:Name="playListBox" HorizontalAlignment="Left" Height="341" Margin="45,55,0,0" VerticalAlignment="Top" Width="117">
