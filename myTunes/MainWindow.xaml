@@ -8,6 +8,29 @@
         Title="MainWindow" Height="450" Width="831.5">
     <Grid>
         <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Right" Height="306" Margin="0,55,-0.2,0" VerticalAlignment="Top" Width="628" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+            
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <!--Code example used from https://docs.microsoft.com/en-us/dotnet/desktop/wpf/controls/how-to-add-row-details-to-a-datagrid-control?view=netframeworkdesktop-4.8-->
+                    <Border Background="BlanchedAlmond" Padding="10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Title: " VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding title}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Artist: " VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding artist}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Length: " VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding length}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+            
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
                 <DataGridTextColumn Binding="{Binding title}" Header="Title"/>
