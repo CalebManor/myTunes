@@ -45,6 +45,7 @@
                 <ContextMenu>
                     <MenuItem Command="Play"/>
                     <Separator/>
+                    <!-- MenuItem command Remove will go here -->
                 </ContextMenu>
             </DataGrid.ContextMenu>
 
