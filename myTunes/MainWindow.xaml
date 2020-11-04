@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="831.5">
     <Grid>
-        <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Right" Height="300" Margin="185,55,10,0" VerticalAlignment="Top" Width="599" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+        <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Right" Height="306" Margin="0,55,-0.2,0" VerticalAlignment="Top" Width="628" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
                 <DataGridTextColumn Binding="{Binding title}" Header="Title"/>
@@ -16,7 +16,8 @@
                 <DataGridTextColumn Binding="{Binding genre}" Header="Genre" Width="150"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ListBox x:Name="playListBox" HorizontalAlignment="Left" Height="300" Margin="45,55,0,0" VerticalAlignment="Top" Width="117">
+        
+        <ListBox x:Name="playListBox" HorizontalAlignment="Left" Height="341" Margin="45,55,0,0" VerticalAlignment="Top" Width="117">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -25,6 +26,9 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        
+        <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="197,377,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="283,377,0,0" VerticalAlignment="Top" Width="82"/>
 
     </Grid>
 </Window>
