@@ -19,6 +19,7 @@ namespace myTunes
     /// </summary>
     public partial class AddPlaylistWindow : Window
     {
+        public string playlistName;
         public AddPlaylistWindow()
         {
             InitializeComponent();
@@ -26,7 +27,13 @@ namespace myTunes
 
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            playlistName = playlistNameTextBox.Text;
+            this.Close();
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

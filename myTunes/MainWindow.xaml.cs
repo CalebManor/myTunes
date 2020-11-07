@@ -24,6 +24,7 @@ namespace myTunes
     {
         private Point startPoint;
         private MusicLib musicLib = new MusicLib();
+        private List<string> playlists = new List<string>();
 
         public MainWindow()
         {
@@ -32,7 +33,7 @@ namespace myTunes
             MusicLib musicLib = new MusicLib();
 
             musicDataGrid.ItemsSource = musicLib.Songs.DefaultView;
-            List<string> playlists = new List<string>();
+            
             playlists.Add("All Music");
             playlists.AddRange(musicLib.Playlists);
             playListBox.ItemsSource = playlists;
@@ -144,10 +145,29 @@ namespace myTunes
         private void newPlaylistButton_Click(object sender, RoutedEventArgs e)
         {
             AddPlaylistWindow addPlaylistWindow = new AddPlaylistWindow();
-            if(addPlaylistWindow.ShowDialog() == true)
+            if(addPlaylistWindow.ShowDialog() == false)
             {
-                musicLib.AddPlaylist(addPlaylistWindow.playlistNameTextBox.Text);
+                if (addPlaylistWindow.playlistName.Length != 0)
+                {
+                    Console.WriteLine(addPlaylistWindow.playlistName);
+                }
+                else
+                {
+                    Console.WriteLine("No name");
+                }
+
+                musicLib.AddPlaylist(addPlaylistWindow.playlistName);
+                playlists.Clear();
+                playlists.Add("All Music");
+                playlists.AddRange(musicLib.Playlists);
+                showListBoxData();
             }
+        }
+
+        private void showListBoxData()
+        {
+            playListBox.ItemsSource = null;
+            playListBox.ItemsSource = playlists;
         }
     }
 
