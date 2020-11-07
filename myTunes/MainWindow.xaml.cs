@@ -74,18 +74,15 @@ namespace myTunes
             // should be performed. Not sure how this should work. I've tried some things and 
             // nothing has been correct so far.
 
-            if (e.Data.GetType() != null)
+            int songID = (int)e.Data.GetData(typeof(int));
+          
+            Label playlist = sender as Label;
+            if (playlist != null)
             {
-                int songID = (int)e.Data.GetData("int");
-
-                Label playlist = sender as Label;
-                if (playlist != null)
+                string playlistName = playlist.Content as string;
+                if (musicLib.PlaylistExists(playlistName))
                 {
-                    string playlistName = playlist.Content as string;
-                    if (musicLib.PlaylistExists(playlistName))
-                    {
-                        musicLib.AddSongToPlaylist(songID, playlistName);
-                    }
+                    musicLib.AddSongToPlaylist(songID, playlistName);
                 }
             }
         }
