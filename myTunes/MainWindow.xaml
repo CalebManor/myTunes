@@ -9,7 +9,9 @@
 
 
     <Grid>
-        <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Right" Height="306" Margin="0,55,-0.2,0" VerticalAlignment="Top" Width="628" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+        <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Right" Height="306" Margin="0,55,-0.2,0" VerticalAlignment="Top" Width="628" 
+                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" MouseMove="musicDataGrid_MouseMove" 
+                  PreviewMouseLeftButtonDown="musicDataGrid_PreviewMouseLeftButtonDown">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
@@ -51,7 +53,8 @@
 
         </DataGrid>
 
-        <ListBox x:Name="playListBox" HorizontalAlignment="Left" Height="341" Margin="45,55,0,0" VerticalAlignment="Top" Width="117">
+        <ListBox x:Name="playListBox" HorizontalAlignment="Left" Height="341" Margin="45,55,0,0" VerticalAlignment="Top" Width="117" 
+                 AllowDrop="True" Drop="playListBox_Drop" DragOver="playListBox_DragOver">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -64,6 +67,7 @@
         <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="197,377,0,0" VerticalAlignment="Top" Width="75" Click="playButton_Click"/>
         <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="283,377,0,0" VerticalAlignment="Top" Width="82"/>
 
+        <!-- Example code found here https://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-toolbar-in-wpf/-->
         <ToolBarTray Height="30" VerticalAlignment="Top">
             <ToolBar Name="myTunesToolBar" Width="110" Height="30">
                 <Button Name="openButton">
