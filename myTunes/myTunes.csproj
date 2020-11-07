@@ -155,5 +155,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Folder-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Add-music-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Information-icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -32,6 +32,11 @@ namespace myTunes
             playlists.AddRange(musicLib.Playlists);
             playListBox.ItemsSource = playlists;
         }
+
+        private void playButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 }
