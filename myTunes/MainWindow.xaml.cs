@@ -121,6 +121,15 @@ namespace myTunes
                 musicLib.AddSong(openFileDialog.FileName);
             }
         }
+
+        private void newPlaylistButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddPlaylistWindow addPlaylistWindow = new AddPlaylistWindow();
+            if(addPlaylistWindow.ShowDialog() == true)
+            {
+                musicLib.AddPlaylist(addPlaylistWindow.playlistNameTextBox.Text);
+            }
+        }
     }
 
 }

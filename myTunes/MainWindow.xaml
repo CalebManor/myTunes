@@ -73,7 +73,7 @@
                 <Button Name="openButton" Click="openButton_Click">
                     <Image Source="Folder-icon.png"/>
                 </Button>
-                <Button Name="newPlaylistButton">
+                <Button Name="newPlaylistButton" Click="newPlaylistButton_Click">
                     <Image Source="Add-music-icon.png"/>
                 </Button>
                 <Separator/>
