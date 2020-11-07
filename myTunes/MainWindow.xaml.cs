@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -130,6 +131,16 @@ namespace myTunes
                 {
                     //Playlist doesn't exist, how did we even get here lmao
                 }
+            }
+        }
+
+        private void openButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Media files|*.mp3;*.m4a;*.wma;*.wav|MP3 (*.mp3)|*.mp3|M4A (*.m4a)|*.m4a|Windows Media Audio (*.wma)|*.wma|Wave files (*.wav)|*.wav|All files|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                musicLib.AddSong(openFileDialog.FileName);
             }
         }
     }
