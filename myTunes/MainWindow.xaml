@@ -54,7 +54,7 @@
         </DataGrid>
 
         <ListBox x:Name="playListBox" HorizontalAlignment="Left" Height="341" Margin="45,55,0,0" VerticalAlignment="Top" Width="117" 
-                 AllowDrop="True" Drop="playListBox_Drop" DragOver="playListBox_DragOver">
+                 AllowDrop="True" Drop="playListBox_Drop" DragOver="playListBox_DragOver" SelectionChanged="PlayListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

@@ -88,6 +88,28 @@ namespace myTunes
                 // Get playlist name from playlist.Content} 
             }
         }
+
+        private void PlayListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = e.AddedItems;
+            string playlistName = selected[0] as string;
+
+            if (playlistName == "All Music")
+            {
+                musicDataGrid.ItemsSource = musicLib.Songs.DefaultView;
+            }
+            else
+            {
+                if(musicLib.PlaylistExists(playlistName))
+                {
+                    musicDataGrid.ItemsSource = musicLib.SongsForPlaylist(playlistName).DefaultView;
+                }
+                else
+                {
+                    //Playlist doesn't exist, how did we even get here lmao
+                }
+            }
+        }
     }
 
 }
