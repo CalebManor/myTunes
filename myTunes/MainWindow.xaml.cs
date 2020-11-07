@@ -53,11 +53,12 @@ namespace myTunes
                 (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
+                DataRowView selected = musicDataGrid.SelectedItem as DataRowView;
+                int songID = (int)selected.Row.ItemArray[0];
                 //Here's where I am having issues. Can't quite figure out what arguments to give here so
                 // so it gives the song Id to be added to the playlist. This may be correct, since I believe
                 // this should be giving the contents of the first column, but I could be totally wrong 
-                DragDrop.DoDragDrop(musicDataGrid, musicDataGrid.Columns[0], DragDropEffects.Copy);
-                Console.WriteLine(musicDataGrid.Columns[0]);
+                DragDrop.DoDragDrop(musicDataGrid, songID, DragDropEffects.Copy);
             }
         }
 
@@ -72,6 +73,18 @@ namespace myTunes
             //The notes also seem to indicate this is where the logic for adding a song to a playlist
             // should be performed. Not sure how this should work. I've tried some things and 
             // nothing has been correct so far.
+
+            int songID = (int)e.Data.GetData(typeof(int));
+          
+            Label playlist = sender as Label;
+            if (playlist != null)
+            {
+                string playlistName = playlist.Content as string;
+                if (musicLib.PlaylistExists(playlistName))
+                {
+                    musicLib.AddSongToPlaylist(songID, playlistName);
+                }
+            }
         }
 
         private void playListBox_DragOver(object sender, DragEventArgs e)
@@ -80,13 +93,19 @@ namespace myTunes
             // is allowed or not. Dr. McCown has some pseudocode to help, but I'm struggling to figure out
             // how exactly to implement it. 
 
+            e.Effects = DragDropEffects.None;
 
             //McCown's code from project pdf:
             Label playlist = sender as Label; 
             if (playlist != null)
-            {    
+            {
                 // Must be on top of a Label in the list box   
                 // Get playlist name from playlist.Content} 
+                string playlistName = playlist.Content as string;
+                if (musicLib.PlaylistExists(playlistName))
+                {
+                    e.Effects = DragDropEffects.Copy;
+                }
             }
         }
 
