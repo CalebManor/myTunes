@@ -23,14 +23,16 @@ namespace myTunes
     public partial class MainWindow : Window
     {
         private Point startPoint;
-        private MusicLib musicLib = new MusicLib();
+        private MusicLib musicLib;
         private List<string> playlists = new List<string>();
+        private MediaPlayer mediaPlayer;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            MusicLib musicLib = new MusicLib();
+            musicLib = new MusicLib();
+            mediaPlayer = new MediaPlayer();
 
             musicDataGrid.ItemsSource = musicLib.Songs.DefaultView;
             
@@ -41,7 +43,18 @@ namespace myTunes
 
         private void playButton_Click(object sender, RoutedEventArgs e)
         {
+            DataRowView selected = musicDataGrid.SelectedItem as DataRowView;
+            int songID = (int)selected.Row.ItemArray[0];
 
+            Song song = musicLib.GetSong(songID);
+            mediaPlayer.Open(new Uri(song.Filename));
+
+            mediaPlayer.Play();
+        }
+
+        private void stopButton_Click(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Stop();
         }
 
         private void musicDataGrid_MouseMove(object sender, MouseEventArgs e)
@@ -166,6 +179,8 @@ namespace myTunes
             AboutWindow aboutWindow = new AboutWindow();
             aboutWindow.ShowDialog();
         }
+
+        
     }
 
 }
