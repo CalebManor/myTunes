@@ -232,11 +232,11 @@ namespace myTunes
                 int songPosition;
                 if (selected.Row.ItemArray[1].GetType() == typeof(string))
                 {
-                    songPosition = Int32.Parse(selected.Row.ItemArray[0] as string);
+                    songPosition = Int32.Parse(selected.Row.ItemArray[1] as string);
                 }
                 else
                 {
-                    songPosition = (int)selected.Row.ItemArray[0];
+                    songPosition = (int)selected.Row.ItemArray[1];
                 }
 
                 musicLib.RemoveSongFromPlaylist(songPosition, songID, playlist);
@@ -252,6 +252,11 @@ namespace myTunes
                     musicLib.DeleteSong(songID);
                 }
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            musicLib.Save();
         }
     }
 

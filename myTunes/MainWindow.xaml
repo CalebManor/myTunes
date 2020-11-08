@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myTunes"
         mc:Ignorable="d"
-        Title="myTunes" Height="450" Width="831.5">
+        Title="myTunes" Height="450" Width="831.5" Closing="Window_Closing" >
 
 
     <Grid RenderTransformOrigin="0.5,0.5">
