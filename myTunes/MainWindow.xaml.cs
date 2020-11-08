@@ -169,6 +169,12 @@ namespace myTunes
             playListBox.ItemsSource = null;
             playListBox.ItemsSource = playlists;
         }
+
+        private void aboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow aboutWindow = new AboutWindow();
+            aboutWindow.ShowDialog();
+        }
     }
 
 }
