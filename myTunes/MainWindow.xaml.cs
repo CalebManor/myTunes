@@ -55,11 +55,14 @@ namespace myTunes
                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
                 DataRowView selected = musicDataGrid.SelectedItem as DataRowView;
-                int songID = (int)selected.Row.ItemArray[0];
-                //Here's where I am having issues. Can't quite figure out what arguments to give here so
-                // so it gives the song Id to be added to the playlist. This may be correct, since I believe
-                // this should be giving the contents of the first column, but I could be totally wrong 
-                DragDrop.DoDragDrop(musicDataGrid, songID, DragDropEffects.Copy);
+                if (selected != null)
+                {
+                    int songID = (int)selected.Row.ItemArray[0];
+                    //Here's where I am having issues. Can't quite figure out what arguments to give here so
+                    // so it gives the song Id to be added to the playlist. This may be correct, since I believe
+                    // this should be giving the contents of the first column, but I could be totally wrong 
+                    DragDrop.DoDragDrop(musicDataGrid, songID, DragDropEffects.Copy);
+                }
             }
         }
 
