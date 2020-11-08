@@ -7,15 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Web;
+using System.Net.Http;
+using System.Net;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace myTunes
 {
     class MusicLib
     {
+
         private DataSet musicDataSet;
 
         public const string XML_MUSICFILE = "music.xml";
         public const string XSD_MUSICFILE = "music.xsd";
+        public const string API_KEY = "e1d7cac3d825c39c69e1e0f2a73ca7f8";
 
         /// <summary>
         /// The list of all song IDs in sorted order
@@ -76,6 +82,8 @@ namespace myTunes
             row["filename"] = s.Filename;
             row["length"] = s.Length;
             row["genre"] = s.Genre;
+            row["url"] = s.AboutUrl;
+            row["albumImage"] = s.AlbumImageUrl;
             table.Rows.Add(row);
 
             // Update this song's ID
@@ -89,7 +97,7 @@ namespace myTunes
         /// </summary>
         /// <param name="filename">MP3 filename</param>
         /// <returns>Song created from the MP3</returns>
-        public Song AddSong(string filename)
+        public async Task<Song> AddSong(string filename)
         {           
             // How to install taglib in Visual Studio:
 			// 1. Open your project in VS
@@ -98,6 +106,8 @@ namespace myTunes
 			// 4. Check your project on the right and click Install
             TagLib.File file = TagLib.File.Create(filename);
 
+            
+            
             Song s = new Song
             {
                 Title = file.Tag.Title,
@@ -108,8 +118,9 @@ namespace myTunes
                 Filename = filename
             };
 
-			// Get song data using the web API
+            // Get song data using the web API
             //GetSongData(s);
+            await APICall_MethodAsync(s);
 
             AddSong(s);
             return s;
@@ -460,6 +471,28 @@ namespace myTunes
             }
 
             return table;
+        }
+
+        //mostly taken from the pdf
+        private async Task APICall_MethodAsync(Song song)
+        {
+                var url = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=" + API_KEY + "&format=json&artist=" + WebUtility.UrlEncode(song.Artist) + "&track=" + WebUtility.UrlEncode(song.Title);
+                try
+                {
+                    using (var httpClient = new HttpClient())
+                    {
+                        var json = await httpClient.GetStringAsync(url);
+                        // Use JSON.Net to convert into C# object
+                        dynamic jsonObj = JsonConvert.DeserializeObject(json);
+                        song.AboutUrl = jsonObj.track.url;
+                        song.AlbumImageUrl = jsonObj.track.album.image[0]["#text"];
+                    }
+                }
+                catch (Exception e)
+                {
+                    // Couldn't find info... song may not be in their library
+                    Console.WriteLine("Error: " + e.Message);
+                }
         }
     }
 }

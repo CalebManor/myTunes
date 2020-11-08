@@ -54,6 +54,13 @@
                                 <TextBlock Text="Length: " VerticalAlignment="Center"/>
                                 <TextBlock Text="{Binding length}"/>
                             </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="About: " VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding url}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding albumImage}"/>
+                            </StackPanel>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
@@ -85,7 +92,7 @@
         <!-- Example code found here https://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-toolbar-in-wpf/-->
         <ToolBarTray Height="30" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <ToolBar Name="myTunesToolBar" Width="110" Height="30">
-                <Button Name="openButton" Click="openButton_Click" ToolTip="Import Song">
+                <Button Name="openButton" Click="openButton_ClickMethodAsync" ToolTip="Import Song">
                     <Image Source="Folder-icon.png"/>
                 </Button>
                 <Button Name="newPlaylistButton" Click="newPlaylistButton_Click" ToolTip="Create Playlist">

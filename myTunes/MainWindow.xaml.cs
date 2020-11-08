@@ -177,13 +177,13 @@ namespace myTunes
             }
         }
 
-        private void openButton_Click(object sender, RoutedEventArgs e)
+        private async void openButton_ClickMethodAsync(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Media files|*.mp3;*.m4a;*.wma;*.wav|MP3 (*.mp3)|*.mp3|M4A (*.m4a)|*.m4a|Windows Media Audio (*.wma)|*.wma|Wave files (*.wav)|*.wav|All files|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
-                musicLib.AddSong(openFileDialog.FileName);
+                await musicLib.AddSong(openFileDialog.FileName);
             }
         }
 
