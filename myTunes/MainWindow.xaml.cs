@@ -26,6 +26,7 @@ namespace myTunes
         private MusicLib musicLib;
         private List<string> playlists = new List<string>();
         private MediaPlayer mediaPlayer;
+        private DataView dataView;
 
         public MainWindow()
         {
@@ -33,8 +34,8 @@ namespace myTunes
 
             musicLib = new MusicLib();
             mediaPlayer = new MediaPlayer();
-
-            musicDataGrid.ItemsSource = musicLib.Songs.DefaultView;
+            dataView = new DataView(musicLib.Songs);
+            musicDataGrid.ItemsSource = dataView;
             
             playlists.Add("All Music");
             playlists.AddRange(musicLib.Playlists);
@@ -123,7 +124,8 @@ namespace myTunes
                     string selectedPlaylist = playListBox.SelectedItem as string;
                     if(selectedPlaylist != null && selectedPlaylist == playlistName)
                     {
-                        musicDataGrid.ItemsSource = musicLib.SongsForPlaylist(playlistName).DefaultView;
+                        //musicDataGrid.ItemsSource = musicLib.SongsForPlaylist(playlistName).DefaultView;
+                        dataView.Table = musicLib.SongsForPlaylist(playlistName);
                     }
                 }
             }
@@ -162,13 +164,13 @@ namespace myTunes
 
             if (playlistName == "All Music")
             {
-                musicDataGrid.ItemsSource = musicLib.Songs.DefaultView;
+                dataView.Table = musicLib.Songs;
             }
             else
             {
                 if(musicLib.PlaylistExists(playlistName))
                 {
-                    musicDataGrid.ItemsSource = musicLib.SongsForPlaylist(playlistName).DefaultView;
+                    dataView.Table = musicLib.SongsForPlaylist(playlistName);
                 }
                 else
                 {
@@ -215,6 +217,10 @@ namespace myTunes
         private void DeleteSong_Click(object sender, RoutedEventArgs e)
         {
             DataRowView selected = musicDataGrid.SelectedItem as DataRowView;
+
+            if (selected == null)
+                return;
+
             int songID;
             if (selected.Row.ItemArray[0].GetType() == typeof(string))
             {
@@ -240,7 +246,7 @@ namespace myTunes
                 }
 
                 musicLib.RemoveSongFromPlaylist(songPosition, songID, playlist);
-                musicDataGrid.ItemsSource = musicLib.SongsForPlaylist(playlist).DefaultView;
+                dataView.Table = musicLib.SongsForPlaylist(playlist);
             }
             else if (playlist == "All Music" || playlist == null)
             {
@@ -257,6 +263,17 @@ namespace myTunes
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             musicLib.Save();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            string search = tb.Text;
+            dataView.RowFilter = 
+                "title LIKE '%" + search + "%' " +
+                "OR artist LIKE '%" + search + "%' " +
+                "OR album LIKE '%" + search + "%' " +
+                "OR genre LIKE '%" + search + "%'";
         }
     }
 

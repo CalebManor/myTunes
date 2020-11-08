@@ -433,6 +433,10 @@ namespace myTunes
         {
             // Create a table with song attributes and position
             DataTable table = new DataTable();
+
+            //this table not having a name was causing issues with the DataView
+            table.TableName = "PlaylistSongs";
+
             table.Columns.Add("id");
             table.Columns.Add("position");
             table.Columns.Add("title");
