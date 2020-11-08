@@ -1,0 +1,19 @@
+﻿<Window x:Class="myTunes.DeleteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:myTunes"
+        mc:Ignorable="d"
+        Title="Remove Song" Height="164.467" Width="376.269" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Are you sure you want to permanently remove this song?" HorizontalAlignment="Left" Margin="25,39,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.029,-0.535" Height="26" Width="317"/>
+        <Button Content="OK" HorizontalAlignment="Left" Margin="79,83,0,0" VerticalAlignment="Top" Width="75" IsDefault="True" Click="Button_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="212,83,0,0" VerticalAlignment="Top" Width="75" IsCancel="True"/>
+
+    </Grid>
+</Window>

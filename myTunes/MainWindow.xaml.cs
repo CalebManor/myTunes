@@ -44,12 +44,23 @@ namespace myTunes
         private void playButton_Click(object sender, RoutedEventArgs e)
         {
             DataRowView selected = musicDataGrid.SelectedItem as DataRowView;
-            int songID = (int)selected.Row.ItemArray[0];
+            if (selected != null)
+            {
+                int songID;
+                if(selected.Row.ItemArray[0].GetType() == typeof(string))
+                {
+                    songID = Int32.Parse(selected.Row.ItemArray[0] as string);
+                }
+                else
+                {
+                    songID = (int)selected.Row.ItemArray[0];
+                }
 
-            Song song = musicLib.GetSong(songID);
-            mediaPlayer.Open(new Uri(song.Filename));
+                Song song = musicLib.GetSong(songID);
+                mediaPlayer.Open(new Uri(song.Filename));
 
-            mediaPlayer.Play();
+                mediaPlayer.Play();
+            }
         }
 
         private void stopButton_Click(object sender, RoutedEventArgs e)
@@ -70,7 +81,15 @@ namespace myTunes
                 DataRowView selected = musicDataGrid.SelectedItem as DataRowView;
                 if (selected != null)
                 {
-                    int songID = (int)selected.Row.ItemArray[0];
+                    int songID;
+                    if (selected.Row.ItemArray[0].GetType() == typeof(string))
+                    {
+                        songID = Int32.Parse(selected.Row.ItemArray[0] as string);
+                    }
+                    else
+                    {
+                        songID = (int)selected.Row.ItemArray[0];
+                    }
                     //Here's where I am having issues. Can't quite figure out what arguments to give here so
                     // so it gives the song Id to be added to the playlist. This may be correct, since I believe
                     // this should be giving the contents of the first column, but I could be totally wrong 
@@ -100,6 +119,12 @@ namespace myTunes
                 if (musicLib.PlaylistExists(playlistName))
                 {
                     musicLib.AddSongToPlaylist(songID, playlistName);
+
+                    string selectedPlaylist = playListBox.SelectedItem as string;
+                    if(selectedPlaylist != null && selectedPlaylist == playlistName)
+                    {
+                        musicDataGrid.ItemsSource = musicLib.SongsForPlaylist(playlistName).DefaultView;
+                    }
                 }
             }
         }
@@ -129,6 +154,10 @@ namespace myTunes
         private void PlayListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = e.AddedItems;
+
+            if (selected.Count == 0)
+                return;
+
             string playlistName = selected[0] as string;
 
             if (playlistName == "All Music")
@@ -164,15 +193,15 @@ namespace myTunes
             if(addPlaylistWindow.ShowDialog() == false)
             {
                 musicLib.AddPlaylist(addPlaylistWindow.playlistName);
-                playlists.Clear();
-                playlists.Add("All Music");
-                playlists.AddRange(musicLib.Playlists);
-                showListBoxData();
+                refreshPlaylists();
             }
         }
 
-        private void showListBoxData()
+        private void refreshPlaylists()
         {
+            playlists.Clear();
+            playlists.Add("All Music");
+            playlists.AddRange(musicLib.Playlists);
             playListBox.ItemsSource = null;
             playListBox.ItemsSource = playlists;
         }
@@ -183,7 +212,47 @@ namespace myTunes
             aboutWindow.ShowDialog();
         }
 
-        
+        private void DeleteSong_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView selected = musicDataGrid.SelectedItem as DataRowView;
+            int songID;
+            if (selected.Row.ItemArray[0].GetType() == typeof(string))
+            {
+                songID = Int32.Parse(selected.Row.ItemArray[0] as string);
+            }
+            else
+            {
+                songID = (int)selected.Row.ItemArray[0];
+            }
+
+            string playlist = playListBox.SelectedItem as string;
+            if(musicLib.PlaylistExists(playlist))
+            {
+
+                int songPosition;
+                if (selected.Row.ItemArray[1].GetType() == typeof(string))
+                {
+                    songPosition = Int32.Parse(selected.Row.ItemArray[0] as string);
+                }
+                else
+                {
+                    songPosition = (int)selected.Row.ItemArray[0];
+                }
+
+                musicLib.RemoveSongFromPlaylist(songPosition, songID, playlist);
+                musicDataGrid.ItemsSource = musicLib.SongsForPlaylist(playlist).DefaultView;
+            }
+            else if (playlist == "All Music" || playlist == null)
+            {
+                var dw = new DeleteWindow();
+                var result = dw.ShowDialog();
+                if (result == true)
+                {
+
+                    musicLib.DeleteSong(songID);
+                }
+            }
+        }
     }
 
 }

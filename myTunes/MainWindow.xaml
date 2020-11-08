@@ -8,10 +8,18 @@
         Title="myTunes" Height="450" Width="831.5">
 
 
-    <Grid>
-        <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Right" Height="306" Margin="0,55,-0.2,0" VerticalAlignment="Top" Width="628" 
+    <Grid RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+        <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Right" Margin="0,55,10,0" VerticalAlignment="Top" 
                   AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" MouseMove="musicDataGrid_MouseMove" 
-                  PreviewMouseLeftButtonDown="musicDataGrid_PreviewMouseLeftButtonDown">
+                  PreviewMouseLeftButtonDown="musicDataGrid_PreviewMouseLeftButtonDown" Height="305" Width="628">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
@@ -45,8 +53,7 @@
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Command="Play"/>
-                    <Separator/>
+                    <MenuItem Header="Delete Song" Click="DeleteSong_Click"/>
                     <!-- MenuItem command Remove will go here -->
                 </ContextMenu>
             </DataGrid.ContextMenu>
