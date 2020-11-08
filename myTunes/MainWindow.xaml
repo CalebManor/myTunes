@@ -9,6 +9,14 @@
 
 
     <Grid RenderTransformOrigin="0.5,0.5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="390*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="157"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RenderTransform>
             <TransformGroup>
                 <ScaleTransform/>
@@ -17,9 +25,9 @@
                 <TranslateTransform/>
             </TransformGroup>
         </Grid.RenderTransform>
-        <DataGrid x:Name="musicDataGrid" HorizontalAlignment="Right" Margin="0,55,10,0" VerticalAlignment="Top" 
+        <DataGrid x:Name="musicDataGrid" Margin="10,7,10,62" 
                   AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" MouseMove="musicDataGrid_MouseMove" 
-                  PreviewMouseLeftButtonDown="musicDataGrid_PreviewMouseLeftButtonDown" Height="305" Width="628">
+                  PreviewMouseLeftButtonDown="musicDataGrid_PreviewMouseLeftButtonDown" Grid.Column="1" Grid.Row="1">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
@@ -60,8 +68,8 @@
 
         </DataGrid>
 
-        <ListBox x:Name="playListBox" HorizontalAlignment="Left" Height="341" Margin="45,55,0,0" VerticalAlignment="Top" Width="117" 
-                  SelectionChanged="PlayListBox_SelectionChanged">
+        <ListBox x:Name="playListBox" Margin="10,7,10,28" 
+                  SelectionChanged="PlayListBox_SelectionChanged" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -71,11 +79,11 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="197,377,0,0" VerticalAlignment="Top" Width="75" Click="playButton_Click"/>
-        <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="283,377,0,0" VerticalAlignment="Top" Width="82" Click="stopButton_Click"/>
+        <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="29,0,0,20" Width="75" Click="playButton_Click" Grid.Column="1" Grid.Row="1" Height="20" VerticalAlignment="Bottom"/>
+        <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="123,0,0,20" VerticalAlignment="Bottom" Width="82" Click="stopButton_Click" Grid.Column="1" Height="20" Grid.Row="1"/>
 
         <!-- Example code found here https://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-toolbar-in-wpf/-->
-        <ToolBarTray Height="30" VerticalAlignment="Top">
+        <ToolBarTray Height="30" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <ToolBar Name="myTunesToolBar" Width="110" Height="30">
                 <Button Name="openButton" Click="openButton_Click" ToolTip="Import Song">
                     <Image Source="Folder-icon.png"/>
