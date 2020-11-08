@@ -147,15 +147,6 @@ namespace myTunes
             AddPlaylistWindow addPlaylistWindow = new AddPlaylistWindow();
             if(addPlaylistWindow.ShowDialog() == false)
             {
-                if (addPlaylistWindow.playlistName.Length != 0)
-                {
-                    Console.WriteLine(addPlaylistWindow.playlistName);
-                }
-                else
-                {
-                    Console.WriteLine("No name");
-                }
-
                 musicLib.AddPlaylist(addPlaylistWindow.playlistName);
                 playlists.Clear();
                 playlists.Add("All Music");
