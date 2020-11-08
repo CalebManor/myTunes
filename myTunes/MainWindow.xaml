@@ -77,7 +77,7 @@
                     <Image Source="Add-music-icon.png"/>
                 </Button>
                 <Separator/>
-                <Button Name="aboutButton">
+                <Button Name="aboutButton" Click="aboutButton_Click">
                     <Image Source="Information-icon.png"/>
                 </Button>
             </ToolBar>

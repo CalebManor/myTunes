@@ -150,15 +150,6 @@ namespace myTunes
             AddPlaylistWindow addPlaylistWindow = new AddPlaylistWindow();
             if(addPlaylistWindow.ShowDialog() == false)
             {
-                if (addPlaylistWindow.playlistName.Length != 0)
-                {
-                    Console.WriteLine(addPlaylistWindow.playlistName);
-                }
-                else
-                {
-                    Console.WriteLine("No name");
-                }
-
                 musicLib.AddPlaylist(addPlaylistWindow.playlistName);
                 playlists.Clear();
                 playlists.Add("All Music");
@@ -171,6 +162,12 @@ namespace myTunes
         {
             playListBox.ItemsSource = null;
             playListBox.ItemsSource = playlists;
+        }
+
+        private void aboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow aboutWindow = new AboutWindow();
+            aboutWindow.ShowDialog();
         }
     }
 
